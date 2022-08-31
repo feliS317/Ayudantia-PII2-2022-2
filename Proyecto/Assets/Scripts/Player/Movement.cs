@@ -38,8 +38,4 @@ public class Movement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
     }
-
-    /*void FixedUpdate() {
-        rb.MovePosition(rb.position + movement.normalized * characterSpeed * Time.fixedDeltaTime);
-    }*/
 }
