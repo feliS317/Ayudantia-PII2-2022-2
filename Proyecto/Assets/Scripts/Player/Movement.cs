@@ -11,6 +11,7 @@ public class Movement : MonoBehaviour
     [Header("Salto")]
     public float jumpForce;
     private bool isGrounded;
+    //private bool jump;
     public Transform groundCheckpoint;
     public LayerMask ground;
 
@@ -19,6 +20,10 @@ public class Movement : MonoBehaviour
     /*public void OnMove(InputAction.CallbackContext context) // Movimiento con InputSystem
     {
         movement = context.ReadValue<Vector2>();
+    }
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        jump = context.action.triggered;
     }*/
 
     void Start()
@@ -31,10 +36,11 @@ public class Movement : MonoBehaviour
     void Update()
     {
         rb.velocity = new Vector2(characterSpeed * Input.GetAxisRaw("Horizontal"), rb.velocity.y);
+        // rb.velocity = new Vector2(characterSpeed * movement.x, rb.velocity.y);
 
         isGrounded = Physics2D.OverlapCircle(groundCheckpoint.position, .2f, ground);
 
-        if(Input.GetKeyDown(KeyCode.T) &&  isGrounded){
+        if(Input.GetKeyDown(KeyCode.T /*jump*/) &&  isGrounded){
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
     }
