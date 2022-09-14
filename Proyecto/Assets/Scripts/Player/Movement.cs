@@ -6,6 +6,8 @@ public class Movement : MonoBehaviour
 {
     [Header("Componentes")]
     private Rigidbody2D rb;
+    private Animator anim;
+    private SpriteRenderer sr;
 
     [Header("Movimiento")]
     public float characterSpeed;
@@ -17,16 +19,14 @@ public class Movement : MonoBehaviour
     [Header("Grounded")]
     private bool isGrounded;
     public Transform groundCheckpoint;
-    public LayerMask ground;
-
-    [Header("Animacion")]
-    private Animator anim;
+    public LayerMask ground;    
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -34,28 +34,41 @@ public class Movement : MonoBehaviour
     {
         rb.velocity = new Vector2(characterSpeed * Input.GetAxisRaw("Horizontal"), rb.velocity.y);
         anim.SetFloat("Xaxis", Mathf.Abs(rb.velocity.x));
-        if(rb.velocity.y < -0.2f)
+        if(rb.velocity.x < 0)
         {
-            anim.SetBool("isFalling", true);
-            anim.SetBool("isJumping", false);
+            sr.flipX = true;
         }
+        else if(rb.velocity.x > 0)
+        {
+            sr.flipX = false;
+        }
+        jumpingAndFalling();
+    }
+
+    void jumpingAndFalling()
+    {
         isGrounded = Physics2D.OverlapCircle(groundCheckpoint.position, 0.1f, ground);
         if(isGrounded)
         {
             canDoubleJump = true;
             anim.SetBool("isFalling", false);
         }
-        
         if(Input.GetButtonDown("Jump")){
             if(isGrounded || canDoubleJump)
             {
                 anim.SetBool("isJumping", true);
+                anim.SetBool("isFalling", false);
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 if(!isGrounded && canDoubleJump)
                 {
                     canDoubleJump = false;
                 }
             }    
+        }
+        if(rb.velocity.y < -1f)
+        {
+            anim.SetBool("isFalling", true);
+            anim.SetBool("isJumping", false);
         }
     }
 }
