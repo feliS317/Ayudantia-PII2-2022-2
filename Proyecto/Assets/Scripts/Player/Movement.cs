@@ -33,7 +33,7 @@ public class Movement : MonoBehaviour
     void Update()
     {
         rb.velocity = new Vector2(characterSpeed * Input.GetAxisRaw("Horizontal"), rb.velocity.y);
-        anim.SetFloat("Xaxis", Mathf.Abs(rb.velocity.x));
+        anim.SetFloat("moveSpeed", Mathf.Abs(rb.velocity.x));
         if(rb.velocity.x < 0)
         {
             sr.flipX = true;
