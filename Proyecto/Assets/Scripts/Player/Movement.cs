@@ -5,6 +5,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     [Header("Componentes")]
+    [SerializeField] private GameObject player;
     private Rigidbody2D rb;
     private Animator anim;
     private SpriteRenderer sr;
@@ -32,20 +33,28 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Attack();
+        MovementUpdate();
+        JumpingAndFalling();
+    }
+
+    void MovementUpdate()
+    {
         rb.velocity = new Vector2(characterSpeed * Input.GetAxisRaw("Horizontal"), rb.velocity.y);
         anim.SetFloat("moveSpeed", Mathf.Abs(rb.velocity.x));
         if(rb.velocity.x < 0)
         {
             sr.flipX = true;
+            player.GetComponent<Attack>().Left();
         }
         else if(rb.velocity.x > 0)
         {
             sr.flipX = false;
+            player.GetComponent<Attack>().Right();
         }
-        jumpingAndFalling();
     }
 
-    void jumpingAndFalling()
+    void JumpingAndFalling()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheckpoint.position, 0.1f, ground);
         if(isGrounded)
@@ -69,6 +78,18 @@ public class Movement : MonoBehaviour
         {
             anim.SetBool("isFalling", true);
             anim.SetBool("isJumping", false);
+        }
+    }
+
+    void Attack()
+    {
+        if(Input.GetButtonDown("Fire1") && isGrounded)
+        {
+            player.GetComponent<Attack>().AttackAnimation();
+        }
+        if(Input.GetButtonDown("Fire2") && isGrounded)
+        {
+            player.GetComponent<Attack>().ProjectileAnimation();
         }
     }
 }
