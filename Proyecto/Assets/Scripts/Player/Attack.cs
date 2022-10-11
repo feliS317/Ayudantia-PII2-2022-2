@@ -6,7 +6,6 @@ public class Attack : MonoBehaviour
 {
     [Header("Componentes")]
     [SerializeField] private BoxCollider2D hitbox;
-    [SerializeField] private GameObject player;
     [SerializeField] private Animator animator;
     [Header("Proyectil")]
     [SerializeField] private Projectile ProjectilePrefab;

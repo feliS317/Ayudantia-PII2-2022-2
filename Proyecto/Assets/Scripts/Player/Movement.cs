@@ -20,7 +20,10 @@ public class Movement : MonoBehaviour
     [Header("Grounded")]
     private bool isGrounded;
     public Transform groundCheckpoint;
-    public LayerMask ground;    
+    public LayerMask ground;
+
+    [Header("Attack")]
+    [SerializeField] private GameObject hitbox;
 
     // Start is called before the first frame update
     void Start()
@@ -45,12 +48,12 @@ public class Movement : MonoBehaviour
         if(rb.velocity.x < 0)
         {
             sr.flipX = true;
-            player.GetComponent<Attack>().Left();
+            hitbox.GetComponent<Attack>().Left();
         }
         else if(rb.velocity.x > 0)
         {
             sr.flipX = false;
-            player.GetComponent<Attack>().Right();
+            hitbox.GetComponent<Attack>().Right();
         }
     }
 
@@ -85,11 +88,26 @@ public class Movement : MonoBehaviour
     {
         if(Input.GetButtonDown("Fire1") && isGrounded)
         {
-            player.GetComponent<Attack>().AttackAnimation();
+            hitbox.GetComponent<Attack>().AttackAnimation();
         }
         if(Input.GetButtonDown("Fire2") && isGrounded)
         {
-            player.GetComponent<Attack>().ProjectileAnimation();
+            hitbox.GetComponent<Attack>().ProjectileAnimation();
         }
+    }
+
+    public void ShootProjectile()
+    {
+        hitbox.GetComponent<Attack>().ShootProjectile();
+    }
+
+    public void EndAttack()
+    {
+        hitbox.GetComponent<Attack>().EndAttack();
+    }
+
+    public void EndFiring()
+    {
+        hitbox.GetComponent<Attack>().EndFiring();
     }
 }

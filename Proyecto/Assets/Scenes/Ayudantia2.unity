@@ -136,7 +136,6 @@ GameObject:
   - component: {fileID: 66252867}
   - component: {fileID: 66252866}
   - component: {fileID: 66252865}
-  - component: {fileID: 66252872}
   - component: {fileID: 66252870}
   - component: {fileID: 66252871}
   m_Layer: 3
@@ -165,6 +164,7 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 64
+  hitbox: {fileID: 1823036963}
 --- !u!50 &66252866
 Rigidbody2D:
   serializedVersion: 4
@@ -306,27 +306,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: 0
   maxHealth: 100
---- !u!114 &66252872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 66252864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85bf31356d864df45880a9dfa65ce428, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitbox: {fileID: 1823036965}
-  player: {fileID: 66252864}
-  animator: {fileID: 66252870}
-  ProjectilePrefab: {fileID: 1408842022827206084, guid: d4061529f4d67524a94b54de9ed3aa76, type: 3}
-  launchOffset: {fileID: 777579723}
-  damage: 10
-  atkCooldown: 0.8
-  fireCooldown: 1
-  attacking: 0
 --- !u!1 &551523974
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,7 +367,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &777579723
 Transform:
   m_ObjectHideFlags: 0
@@ -458,6 +437,10 @@ PrefabInstance:
     - target: {fileID: 6202925429347394578, guid: 4310118b5df1d0845b601ed0405d48c9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6202925429347394582, guid: 4310118b5df1d0845b601ed0405d48c9, type: 3}
+      propertyPath: m_BodyType
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4310118b5df1d0845b601ed0405d48c9, type: 3}
@@ -9631,6 +9614,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1823036964}
   - component: {fileID: 1823036965}
+  - component: {fileID: 1823036966}
   m_Layer: 3
   m_Name: Hitbox
   m_TagString: Untagged
@@ -9667,7 +9651,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.54755735, y: 0.05101469}
+  m_Offset: {x: 0.85676956, y: 0.05101466}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -9678,8 +9662,28 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6122885, y: 1.1020291}
+  m_Size: {x: 1.0112743, y: 1.1020291}
   m_EdgeRadius: 0
+--- !u!114 &1823036966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823036963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85bf31356d864df45880a9dfa65ce428, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitbox: {fileID: 1823036965}
+  animator: {fileID: 66252870}
+  ProjectilePrefab: {fileID: 1408842022827206084, guid: d4061529f4d67524a94b54de9ed3aa76, type: 3}
+  launchOffset: {fileID: 777579723}
+  damage: 10
+  atkCooldown: 0.8
+  fireCooldown: 1
+  attacking: 0
 --- !u!1 &1852474998
 GameObject:
   m_ObjectHideFlags: 0

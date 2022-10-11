@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    private GameObject player;
+    private GameObject hitbox;
     [SerializeField] private bool enemy;
     private Animator anim;
     private float health;
@@ -13,7 +13,7 @@ public class Health : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindWithTag("Player");
+        hitbox = GameObject.FindWithTag("Player").transform.Find("Hitbox").gameObject;
         anim = GetComponent<Animator>();
         health = maxHealth;
     }
@@ -23,7 +23,7 @@ public class Health : MonoBehaviour
     {
         if(enemy && attacked)
         {
-            if(!player.GetComponent<Attack>().attacking)
+            if(!hitbox.GetComponent<Attack>().attacking)
             {
                 attacked = false;
             }
@@ -35,17 +35,17 @@ public class Health : MonoBehaviour
         if(!attacked)
         {
             health += mod;
-            if(health <= 0)
-            {
-                Die();
-            }
-            else if(mod < 0 && enemy)
+            if(mod < 0 && enemy)
             {
                 attacked = true;
             }
             else if(health > maxHealth)
             {
                 health = maxHealth;
+            }
+            if(health <= 0)
+            {
+                Die();
             }
         }
     }
