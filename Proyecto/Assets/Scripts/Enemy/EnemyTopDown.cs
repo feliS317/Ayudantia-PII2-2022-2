@@ -80,7 +80,7 @@ public class EnemyTopDown : MonoBehaviour
 
     private void InRange()
     {
-        distance = enemy.transform.position - player.transform.position;
+        distance = player.transform.position - enemy.transform.position;
         if(distance.magnitude < distanceDetection)
         {
             agent.SetDestination(player.transform.position);
