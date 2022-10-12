@@ -62,7 +62,7 @@ public class MovementTopDown : MonoBehaviour
             }
             if (rb.velocity.x < 0)
             {
-                anim.SetBool("Side", false);
+                anim.SetBool("Side", true);
                 sr.flipX = true;
                 hitbox.GetComponent<Attack>().Left();
             }
@@ -74,7 +74,6 @@ public class MovementTopDown : MonoBehaviour
         }
         if (rb.velocity.x == 0)
         {
-            sr.flipX = false;
             anim.SetBool("Side", false);
         }
     }
