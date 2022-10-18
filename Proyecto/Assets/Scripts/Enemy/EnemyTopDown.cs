@@ -10,6 +10,8 @@ public class EnemyTopDown : MonoBehaviour
 
     [SerializeField] private GameObject enemy;
     private GameObject player;
+    [SerializeField] private GameObject hitbox;
+
 
     private UnityEngine.AI.NavMeshAgent agent;
 
@@ -31,6 +33,10 @@ public class EnemyTopDown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!hitbox.GetComponent<EnemyAttack>().attacking)
+        {
+            Attack();
+        }
         Animation();
         InRange();
     }
@@ -45,26 +51,30 @@ public class EnemyTopDown : MonoBehaviour
             {
                 anim.SetBool("Down", false);
                 anim.SetBool("Up", true);
+                anim.SetInteger("Direction", 1);
             }
             else if (distance.y < 0)
             {
                 anim.SetBool("Up", false);
                 anim.SetBool("Down", true);
+                anim.SetInteger("Direction", 3);
             }
         }
         else if(Mathf.Abs(distance.x) > Mathf.Abs(distance.y))
         {
             anim.SetBool("Up", false);
             anim.SetBool("Down", false);
+            anim.SetBool("Side", true);
+            anim.SetInteger("Direction", 2);
             if (distance.x > 0)
             {
-                anim.SetBool("Side", true);
                 sr.flipX = false;
+                Right();
             }
             if (distance.x < 0)
             {
-                anim.SetBool("Side", true);
                 sr.flipX = true;
+                Left();
             }
         }
         if (distance.y == 0)
@@ -85,5 +95,33 @@ public class EnemyTopDown : MonoBehaviour
         {
             agent.SetDestination(player.transform.position);
         }   
+    }
+
+    private void Attack()
+    {
+        if (hitbox.GetComponent<EnemyAttack>().playerInRange && hitbox.GetComponent<EnemyAttack>().canAttack)
+        {
+            hitbox.GetComponent<EnemyAttack>().AttackAnimation();
+        }
+    }
+
+    public void EndAnimation()
+    {
+        hitbox.GetComponent<EnemyAttack>().EndAnimation();
+    }
+
+    public void DealDamage()
+    {
+        hitbox.GetComponent<EnemyAttack>().DealDamage();
+    }
+
+    public void Left()
+    {
+        hitbox.transform.localScale = new Vector3(-1f, 1f, 1f);
+    }
+
+    public void Right()
+    {
+        hitbox.transform.localScale = new Vector3(1f, 1f, 1f);
     }
 }
