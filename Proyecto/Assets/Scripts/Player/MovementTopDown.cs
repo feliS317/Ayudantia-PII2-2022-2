@@ -43,15 +43,18 @@ public class MovementTopDown : MonoBehaviour
             {
                 anim.SetBool("Down", false);
                 anim.SetBool("Up", true);
+                anim.SetInteger("Direction", 0);
             }
             else if (rb.velocity.y < 0)
             {
                 anim.SetBool("Up", false);
                 anim.SetBool("Down", true);
+                anim.SetInteger("Direction", 2);
             }
         }
         else if(Mathf.Abs(rb.velocity.x) > Mathf.Abs(rb.velocity.y))
         {
+            anim.SetInteger("Direction", 1);
             anim.SetBool("Up", false);
             anim.SetBool("Down", false);
             if (rb.velocity.x > 0)

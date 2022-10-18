@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyTopDown : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class EnemyTopDown : MonoBehaviour
     [SerializeField] private GameObject hitbox;
 
 
-    private UnityEngine.AI.NavMeshAgent agent;
+    private NavMeshAgent agent;
 
     private Vector2 distance;
     [SerializeField] private float distanceDetection;
