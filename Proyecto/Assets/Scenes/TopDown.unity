@@ -1010,6 +1010,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3316932269501483449, guid: 1f397554adc6c5640b9844f3392c716f, type: 3}
+      propertyPath: dashTime
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7084998498514381448, guid: 1f397554adc6c5640b9844f3392c716f, type: 3}
       propertyPath: m_GravityScale
       value: 0
