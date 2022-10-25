@@ -172,8 +172,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 7084998498514381450}
-  characterSpeed: 5
+  characterSpeed: 2
   hitbox: {fileID: 7084998499241790697}
+  isDashing: 0
+  dashSpeed: 5
+  dashCooldown: 3
 --- !u!95 &7084998498514381452
 Animator:
   serializedVersion: 4
@@ -207,6 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: 0
+  topDown: 0
   maxHealth: 100
 --- !u!1 &7084998498982683756
 GameObject:

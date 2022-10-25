@@ -11,14 +11,23 @@ public class MovementTopDown : MonoBehaviour
     private SpriteRenderer sr;
 
     [Header("Movimiento")]
+    private float currentSpeed;
     public float characterSpeed;
 
     [Header("Attack")]
     [SerializeField] private GameObject hitbox;
 
+    [Header("Dash")]
+    public bool isDashing = false;
+    private bool canDash = true;
+    public float dashSpeed = 5f;
+    public float dashTime = 5f;
+    public float dashCooldown = 5f;
+
     // Start is called before the first frame update
     void Start()
     {
+        currentSpeed = characterSpeed;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
@@ -27,13 +36,20 @@ public class MovementTopDown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Attack();
+        if(!isDashing)
+        {
+            Attack();
+        }
+        if(!hitbox.GetComponent<Attack>().attacking)
+        {
+            Dashing();
+        }
         MovementUpdate();
     }
 
     void MovementUpdate()
     {
-        rb.velocity = new Vector2(characterSpeed * Input.GetAxisRaw("Horizontal"), characterSpeed * Input.GetAxisRaw("Vertical"));
+        rb.velocity = new Vector2(currentSpeed * Input.GetAxisRaw("Horizontal"), currentSpeed * Input.GetAxisRaw("Vertical"));
 
         if(Mathf.Abs(rb.velocity.y) > Mathf.Abs(rb.velocity.x))
         {
@@ -93,6 +109,14 @@ public class MovementTopDown : MonoBehaviour
         }
     }
 
+    void Dashing()
+    {
+        if(Input.GetButtonDown("Jump") && canDash)
+        {
+            StartCoroutine(Dash(dashTime));
+        }
+    }
+
     public void ShootProjectile()
     {
         hitbox.GetComponent<Attack>().ShootProjectile();
@@ -106,5 +130,23 @@ public class MovementTopDown : MonoBehaviour
     public void EndFiring()
     {
         hitbox.GetComponent<Attack>().EndFiring();
+    }
+
+    private IEnumerator Dash(float dash)
+    {   
+        canDash = false;
+        isDashing = true;
+        currentSpeed = dashSpeed;
+        yield return new WaitForSeconds(dash);
+        isDashing = false;
+        currentSpeed = characterSpeed;
+        StartCoroutine(DashCooldown(dashCooldown));
+    }
+
+    private IEnumerator DashCooldown(float dashCooldown)
+    {      
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
+
     }
 }
