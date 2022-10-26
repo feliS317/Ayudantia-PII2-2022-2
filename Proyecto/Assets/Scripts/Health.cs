@@ -5,7 +5,6 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] private bool enemy;
-    [SerializeField] private bool topDown;
     [SerializeField] private float maxHealth = 20f;
     
     private GameObject player;
@@ -36,24 +35,21 @@ public class Health : MonoBehaviour
     }
 
     public void UpdateHealth(float mod)
-    {
-        if(!attacked)
-        {
-            if(topDown && player.GetComponent<MovementTopDown>().isDashing)
+    {       
+        if(!attacked || (!enemy && !player.GetComponent<MovementTopDown>().isDashing))
+        {   
+            health += mod;
+            if(mod < 0 && enemy)
             {
-                health += mod;
-                if(mod < 0 && enemy)
-                {
-                    attacked = true;
-                }
-                else if(health > maxHealth)
-                {
-                    health = maxHealth;
-                }
-                if(health <= 0)
-                {
-                    Die();
-                }
+                attacked = true;
+            }
+            else if(health > maxHealth)
+            {
+                health = maxHealth;
+            }
+            if(health <= 0)
+            {
+                Die();
             }
         }
     }

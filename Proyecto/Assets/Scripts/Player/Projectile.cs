@@ -15,7 +15,7 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += transform.right * Time.deltaTime * speed;
+        transform.position += transform.right * Time.deltaTime * speed * Mathf.Cos(transform.rotation.x) + transform.up * Time.deltaTime * speed * Mathf.Sin(transform.rotation.x);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -23,7 +23,11 @@ public class Projectile : MonoBehaviour
         if(other.tag == "Enemy")
         {
             other.GetComponent<Health>().UpdateHealth(-damage);
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+        else if(other.tag == "Map")
+        {
+            Destroy(gameObject);
+        }
     }
 }

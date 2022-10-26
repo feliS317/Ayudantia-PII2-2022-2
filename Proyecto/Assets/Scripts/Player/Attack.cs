@@ -57,6 +57,8 @@ public class Attack : MonoBehaviour
     public void ShootProjectile()
     {
         Instantiate(ProjectilePrefab, launchOffset.position, transform.rotation);
+        Instantiate(ProjectilePrefab, launchOffset.position, transform.rotation * Quaternion.Euler(10f, 0f, 0f));
+        Instantiate(ProjectilePrefab, launchOffset.position, transform.rotation * Quaternion.Euler(350f, 0f, 0f));
     }
 
     public void EndAttack()
