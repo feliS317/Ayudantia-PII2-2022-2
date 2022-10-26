@@ -64,6 +64,10 @@ public class Health : MonoBehaviour
     }
     public void Destroy()
     {
+        if(enemy)
+        {
+            Doors.cantEnemy--;
+        }
         Destroy(gameObject);
     }
 }

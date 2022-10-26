@@ -20,6 +20,7 @@ public class EnemyTopDown : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Doors.cantEnemy++;
         player = GameObject.FindWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
