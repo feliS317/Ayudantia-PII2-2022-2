@@ -28,13 +28,13 @@ public class Attack : MonoBehaviour
     public void Left()
     {
         hitbox.transform.localScale = new Vector3(-1f, 1f, 1f);
-        launchOffset.transform.rotation = Quaternion.Euler(180f, 0f, 0f);
+        launchOffset.transform.localScale = new Vector3(-1f, 1f, 1f);
     }
 
     public void Right()
     {
         hitbox.transform.localScale = new Vector3(1f, 1f, 1f);
-        launchOffset.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        launchOffset.transform.localScale = new Vector3(-1f, 1f, 1f);
     }
 
     public void AttackAnimation()
