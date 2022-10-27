@@ -15,7 +15,7 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += transform.right * Time.deltaTime * speed * Mathf.Cos(transform.rotation.x) + transform.up * Time.deltaTime * speed * Mathf.Sin(transform.rotation.x) + transform.forward * Time.deltaTime * speed * Mathf.Sin(transform.rotation.x);
+        transform.position += transform.right * Time.deltaTime * speed * Mathf.Cos(transform.rotation.x) + transform.up * Time.deltaTime * speed * Mathf.Sin(transform.rotation.y);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
