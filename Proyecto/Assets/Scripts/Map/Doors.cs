@@ -16,12 +16,13 @@ public class Doors : MonoBehaviour
      [SerializeField] private AudioClip bossMusic;
      public static int cantEnemy;
      [Header("Players")]
-     public static Collider2D player1;
+     private Collider2D player1;
 
 
 
     void Start()
     {
+          player1 = GameObject.FindWithTag("Player").GetComponent<Collider2D>();
           cantEnemy = 0;
           if(items != null)
           {

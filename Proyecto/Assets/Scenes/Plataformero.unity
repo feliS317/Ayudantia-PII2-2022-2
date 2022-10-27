@@ -7161,6 +7161,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7084998498202564096, guid: 5cee45d69e1225640a6cab5cf6d2c771, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7084998498514381450, guid: 5cee45d69e1225640a6cab5cf6d2c771, type: 3}
       propertyPath: m_Name
       value: PlayerPlat

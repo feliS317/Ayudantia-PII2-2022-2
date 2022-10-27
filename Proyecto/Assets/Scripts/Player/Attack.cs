@@ -28,11 +28,13 @@ public class Attack : MonoBehaviour
     public void Left()
     {
         hitbox.transform.localScale = new Vector3(-1f, 1f, 1f);
+        launchOffset.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
     }
 
     public void Right()
     {
         hitbox.transform.localScale = new Vector3(1f, 1f, 1f);
+        launchOffset.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
     }
 
     public void AttackAnimation()
@@ -56,9 +58,9 @@ public class Attack : MonoBehaviour
 
     public void ShootProjectile()
     {
-        Instantiate(ProjectilePrefab, launchOffset.position, transform.rotation);
-        Instantiate(ProjectilePrefab, launchOffset.position, transform.rotation * Quaternion.Euler(10f, 0f, 0f));
-        Instantiate(ProjectilePrefab, launchOffset.position, transform.rotation * Quaternion.Euler(350f, 0f, 0f));
+        Instantiate(ProjectilePrefab, launchOffset.position, launchOffset.rotation);
+        Instantiate(ProjectilePrefab, launchOffset.position, launchOffset.rotation * Quaternion.Euler(10f, 0f, 0f));
+        Instantiate(ProjectilePrefab, launchOffset.position, launchOffset.rotation * Quaternion.Euler(350f, 0f, 0f));
     }
 
     public void EndAttack()
