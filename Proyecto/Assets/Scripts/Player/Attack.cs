@@ -17,10 +17,14 @@ public class Attack : MonoBehaviour
     public bool attacking = false;
     private bool canAttack = true;
     private bool canFire = true;
+    [SerializeField] AudioClip[] sfx;
+    [SerializeField] AudioController controller;
+    int randomSfx;
     
     // Start is called before the first frame update
     void Start()
     {
+        controller = GameObject.Find("Audio").GetComponent<AudioController>();
         hitbox.enabled = false;
     }
 
@@ -41,6 +45,8 @@ public class Attack : MonoBehaviour
     {
         if(canAttack)
         {
+            randomSfx = Random.Range(0, 3);
+            controller.PlaySfx(sfx[randomSfx]);
             attacking = true;
             hitbox.enabled = true;
             animator.SetBool("isAttacking", true);
