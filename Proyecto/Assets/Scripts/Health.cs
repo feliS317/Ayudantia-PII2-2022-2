@@ -10,7 +10,7 @@ public class Health : MonoBehaviour
     private GameObject player;
     private GameObject hitbox;
     private Animator anim;
-    private float health;
+    public float health;
     private bool attacked = false;
     
     // Start is called before the first frame update
@@ -65,5 +65,21 @@ public class Health : MonoBehaviour
             Doors.cantEnemy--;
         }
         Destroy(gameObject);
+    }
+
+    public void SavePlayer(){
+        SaveSystem.SavePlayer(this);
+    }
+
+    public void LoadPlayer(){
+        SavedData data = SaveSystem.LoadPlayer();
+
+        health = data.health;
+
+        Vector3 position;
+        position.x = data.position[0];
+        position.y = data.position[1];
+        position.z = data.position[2];
+        transform.position = position;
     }
 }
