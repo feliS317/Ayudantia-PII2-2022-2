@@ -6,7 +6,7 @@ public static class SaveSystem
 {
     public static void SavePlayer(Health player){
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/player.data";
+        string path = Application.persistentDataPath + "/savedata.data";
         FileStream stream = new FileStream(path, FileMode.Create);
 
         SavedData data = new SavedData(player);

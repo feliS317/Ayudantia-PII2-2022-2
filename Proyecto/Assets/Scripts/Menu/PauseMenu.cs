@@ -7,7 +7,13 @@ public class PauseMenu : MonoBehaviour
     public static bool isPaused = false;
 
     public GameObject pauseScreen;
+    private Animator animator;
+    private float prevSpeed;
 
+    void Start()
+    {
+        animator = GameObject.FindWithTag("Player").GetComponent<Animator>();
+    }
     
     void Update()
     {
@@ -21,15 +27,23 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    void Resume(){
+    public void Resume(){
         pauseScreen.SetActive(false);
         isPaused = false;
         Time.timeScale = 1f;
+        animator.speed = prevSpeed;
     }
 
-    void Pause(){
+    public void Pause(){
+        prevSpeed = animator.speed;
         pauseScreen.SetActive(true);
         isPaused = true;
         Time.timeScale = 0f;
+        animator.speed = 0;
+    }
+
+    public void Save()
+    {
+        SaveSystem.SavePlayer(GameObject.FindWithTag("Player").GetComponent<Health>());
     }
 }

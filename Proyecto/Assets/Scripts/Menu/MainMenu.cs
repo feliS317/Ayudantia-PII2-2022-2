@@ -10,6 +10,12 @@ public class MainMenu : MonoBehaviour
     public void Play()
     {
         SceneManager.LoadScene(level, LoadSceneMode.Single);
+        Health.level = level;
+    }
+
+    public void Load()
+    {
+        SceneManager.LoadScene(Health.level, LoadSceneMode.Single);
     }
 
     public void Quit() 

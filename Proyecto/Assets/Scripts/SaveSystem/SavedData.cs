@@ -5,12 +5,13 @@ using UnityEngine;
 [System.Serializable]
 public class SavedData
 {
-    public int level;
+    public string level;
     public float health;
     public float[] position;
 
     public SavedData(Health player){
         health = player.health;
+        level = Health.level;
 
         position = new float[3];
         position[0] = player.transform.position.x;

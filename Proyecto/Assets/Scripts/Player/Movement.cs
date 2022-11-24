@@ -36,9 +36,12 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Attack();
-        MovementUpdate();
-        JumpingAndFalling();
+        if(!PauseMenu.isPaused)
+        {
+            Attack();
+            MovementUpdate();
+            JumpingAndFalling();
+        }
     }
 
     void MovementUpdate()

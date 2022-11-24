@@ -12,7 +12,7 @@ public class Health : MonoBehaviour
     private Animator anim;
     public float health;
     private bool attacked = false;
-    
+    public static string level;
     // Start is called before the first frame update
     void Start()
     {
